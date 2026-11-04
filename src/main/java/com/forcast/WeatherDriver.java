@@ -17,8 +17,8 @@ public class WeatherDriver {
                 return LocalDate.parse(dateString.trim(), formatter);
         }
 
-        public void showForcast(LocalDate date) throws Exception {
-                ArrayList<Forecast> forecasts = WeatherService.getForecast(date, LATITUDE, LONGITUDE);
+        public void showForcast(LocalDate date, double latitude, double longitude) throws Exception {
+                ArrayList<Forecast> forecasts = WeatherService.getForecast(date, latitude, longitude);
 
                 System.out.println("Forecast for " + date);
                 System.out.println("-------------------------");
@@ -36,6 +36,6 @@ public class WeatherDriver {
     public static void main(String[] args) throws Exception {
         LocalDate eventDate = stringToDate("11/05/2026");
         WeatherDriver driver = new WeatherDriver();
-        driver.showForcast(eventDate);
+        driver.showForcast(eventDate, LATITUDE, LONGITUDE);
     }
 }

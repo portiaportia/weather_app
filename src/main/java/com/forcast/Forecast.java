@@ -1,5 +1,7 @@
 package com.forcast;
 
+import java.util.HashMap;
+
 public class Forecast {
     private int hour;
     private Double temperatureF;
@@ -89,64 +91,48 @@ public class Forecast {
         return result;
     }
 
-    private String getCondition() {
-        if (weatherCode == null) {
-            return "Unavailable";
-        }
+    private Condition getCondition() {
+        HashMap<Integer, Condition> conditionsMap = new HashMap<>();
 
-        switch (weatherCode) {
-            case 0:
-                return "Clear sky";
-            case 1:
-                return "Mainly clear";
-            case 2:
-                return "Partly cloudy";
-            case 3:
-                return "Overcast";
-            case 45:
-            case 48:
-                return "Fog";
-            case 51:
-            case 53:
-            case 55:
-                return "Drizzle";
-            case 56:
-            case 57:
-                return "Freezing drizzle";
-            case 61:
-                return "Light rain";
-            case 63:
-                return "Moderate rain";
-            case 65:
-                return "Heavy rain";
-            case 66:
-            case 67:
-                return "Freezing rain";
-            case 71:
-                return "Light snow";
-            case 73:
-                return "Moderate snow";
-            case 75:
-                return "Heavy snow";
-            case 77:
-                return "Snow grains";
-            case 80:
-            case 81:
-            case 82:
-                return "Rain showers";
-            case 85:
-            case 86:
-                return "Snow showers";
-            case 95:
-                return "Thunderstorm";
-            case 96:
-                return "Thunderstorm with slight hail";
-            case 97:
-                return "Heavy thunderstorm";
-            case 99:
-                return "Thunderstorm with heavy hail";
-            default:
-                return "Unknown";
-        }
+        conditionsMap.put(0, Condition.CLEAR_SKY);
+        conditionsMap.put(1, Condition.MAINLY_CLEAR);
+        conditionsMap.put(2, Condition.PARTLY_CLOUDLY);
+        conditionsMap.put(3, Condition.OVERCAST);
+
+        conditionsMap.put(45, Condition.FOG);
+        conditionsMap.put(48, Condition.FOG);
+
+        conditionsMap.put(51, Condition.DRIZZLE);
+        conditionsMap.put(53, Condition.DRIZZLE);
+        conditionsMap.put(55, Condition.DRIZZLE);
+
+        conditionsMap.put(56, Condition.FREEZING_DRIZZLE);
+        conditionsMap.put(57, Condition.FREEZING_DRIZZLE);
+
+        conditionsMap.put(61, Condition.LIGHT_RAIN);
+        conditionsMap.put(63, Condition.MODERATE_RAIN);
+        conditionsMap.put(65, Condition.HEAVY_RAIN);
+
+        conditionsMap.put(66, Condition.FREEZING_RAIN);
+        conditionsMap.put(67, Condition.FREEZING_RAIN);
+
+        conditionsMap.put(71, Condition.LIGHT_SNOW);
+        conditionsMap.put(73, Condition.MODERATE_SNOW);
+        conditionsMap.put(75, Condition.HEAVY_SNOW);
+        conditionsMap.put(77, Condition.SNOW_GRAINS);
+
+        conditionsMap.put(80, Condition.RAIN_SHOWERS);
+        conditionsMap.put(81, Condition.RAIN_SHOWERS);
+        conditionsMap.put(82, Condition.RAIN_SHOWERS);
+
+        conditionsMap.put(85, Condition.SNOW_SHOWERS);
+        conditionsMap.put(86, Condition.SNOW_SHOWERS);
+
+        conditionsMap.put(95, Condition.THUNDERSTORM);
+        conditionsMap.put(96, Condition.THUNDERSTOM_HAIL);
+        conditionsMap.put(97, Condition.HEAVY_THUNDERSTORM);
+        conditionsMap.put(99, Condition.THUNDERSTORM_HEAVY_HAIL);
+
+        return conditionsMap.getOrDefault(weatherCode, Condition.UNKNOWN);
     }
 }
